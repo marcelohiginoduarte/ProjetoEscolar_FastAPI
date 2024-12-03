@@ -7,6 +7,7 @@ class Aluno(Base):
 
     id = Column(Integer, primary_key=True)
     nome = Column(String, index=True)
+    nome_mae = Column(String, index=True)
     serie = Column(Integer, index=True)
     Ano_letivo = Column(Integer, index=True)
     idade = Column(Integer)
