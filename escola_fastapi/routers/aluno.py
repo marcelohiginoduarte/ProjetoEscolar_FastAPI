@@ -33,3 +33,8 @@ def ver_aluno(aluno_id: int, db: Session = Depends(get_db)):
     if db_student is None:
         raise HTTPException(status_code=404, detail="Aluno não foi encontrado")
     return db_student
+
+
+@router.put("/Aluno/{aluno_id}", response_model=schemas.AtualizarAluno)
+def atualizar_aluno(aluno_id: int, aluno_atualizado: schemas.AtualizarAluno, db: Session = Depends(get_db)):
+    return crud.atualizar_aluno_db(db, aluno_id, aluno_atualizado)

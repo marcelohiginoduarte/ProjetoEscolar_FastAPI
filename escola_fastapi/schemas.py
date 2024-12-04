@@ -27,3 +27,10 @@ class Aluno(AlunoBase):
     class Config:
         orm_mode = True
 
+class AtualizarAluno(AlunoBase):
+    nome: str
+    nome_mae: str
+    serie: int
+    Ano_letivo: int
+    idade: int
+
