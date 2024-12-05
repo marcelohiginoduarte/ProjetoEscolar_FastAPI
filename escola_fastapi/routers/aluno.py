@@ -2,6 +2,7 @@ from fastapi import APIRouter, HTTPException, Depends
 from sqlalchemy.orm import Session
 from escola_fastapi import schemas, crud
 from escola_fastapi.database import SessionLocal
+from escola_fastapi.securyt import get_current_user, hash_passsword
 
 
 router = APIRouter()
@@ -14,7 +15,7 @@ def get_db():
         db.close()
 
 @router.post("/Criar_aluno/", response_model=schemas.AlunoCriado)
-def criar_aluno(Aluno: schemas.CriarAluno, db: Session = Depends(get_db)):
+def criar_aluno(Aluno: schemas.CriarAluno, db: Session = Depends(get_db), current_user: schemas.UserLogin = Depends(get_current_user)):
     aluno_criado = crud.criar_aluno(db=db, Aluno=Aluno)
     if aluno_criado:
         return{"nome": aluno_criado.nome, "serie": aluno_criado.serie}

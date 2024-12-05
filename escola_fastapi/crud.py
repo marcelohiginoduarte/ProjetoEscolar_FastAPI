@@ -1,6 +1,9 @@
 from sqlalchemy.orm import Session
 from fastapi import HTTPException
 from . import models, schemas
+from passlib.context import CryptContext
+
+pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 
 def ver_alunos(db: Session, skip: int=0, limit = 10):
     return db.query(models.Aluno).offset(skip).limit(limit).all()
@@ -37,3 +40,7 @@ def atualizar_aluno_db(db: Session, aluno_id: int, aluno_atualizado: schemas.Atu
     db.commit()
     db.refresh(db_aluno)
     return db_aluno
+
+def ver_usuarios(db: Session, skip: int=0, limit = 10):
+    return db.query(models.Usuario).offset(skip).limit(limit).all()
+

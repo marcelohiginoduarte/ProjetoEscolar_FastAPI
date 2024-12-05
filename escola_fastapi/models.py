@@ -1,4 +1,4 @@
-from sqlalchemy import Column, Integer, String
+from sqlalchemy import Column, Integer, String, Boolean
 from .database import Base 
 
 
@@ -11,3 +11,12 @@ class Aluno(Base):
     serie = Column(Integer, index=True)
     Ano_letivo = Column(Integer, index=True)
     idade = Column(Integer)
+
+class Usuario(Base):
+    __tablename__ = "Usuarios"
+
+    id = Column(Integer, primary_key=True)
+    username = Column(Integer, index=True)
+    email = Column(Integer, unique=True, index=True)
+    hashed_password = Column(String)
+    is_active = Column(Boolean, default=True)

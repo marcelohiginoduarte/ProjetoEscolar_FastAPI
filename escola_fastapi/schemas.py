@@ -1,5 +1,5 @@
-from pydantic import BaseModel
-from typing import Optional
+from pydantic import BaseModel, EmailStr
+from typing import Optional, List
 
 class AlunoBase(BaseModel):
     nome: str
@@ -34,3 +34,28 @@ class AtualizarAluno(AlunoBase):
     Ano_letivo: int
     idade: int
 
+class UserLogin(BaseModel):
+    username: str
+    password: str
+
+class UserInDB(UserLogin):
+    hashed_password: str
+
+class Usuario(BaseModel):
+    id: int
+    username: str
+    email: str
+
+    class Config:
+        orm_mode = True
+
+class UsuarioCreate(BaseModel):
+    username: str
+    email: EmailStr
+    password: str
+
+class UsuarioAtivo(Usuario):
+    is_active: bool
+
+    class Config:
+        from_attributes = True
