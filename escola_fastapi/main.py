@@ -1,12 +1,13 @@
 from fastapi import FastAPI, Depends, status
 from fastapi import HTTPException
 from sqlalchemy.orm import Session
-from . import crud, models, schemas
+from escola_fastapi import crud, models, schemas
 from .database import engine
 from escola_fastapi.routers import aluno, usuarios
 from escola_fastapi.routers.aluno import get_db
 from escola_fastapi.securyt import create_access_token, verify_token, authenticate_user
 from escola_fastapi.models import Usuario
+
 
 models.Base.metadata.create_all(bind=engine)
 
